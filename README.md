@@ -9,4 +9,5 @@ In this appium, following library are used:
   > selenium-server-java-library-3.5.2
 
   Installation:
- 1. First install jdk, eclipse, selenium sever jar file
+ 1. First install jdk
+ 	i. go to url 

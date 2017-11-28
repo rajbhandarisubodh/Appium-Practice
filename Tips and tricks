@@ -1,0 +1,81 @@
+ Tips & Tricks:
+  
+  1. way to find appPackage and appActivity (follow this - http://www.automationtestinghub.com/apppackage-and-appactivity-name/ )
+ Using ‘mCurrentFocus’ or ‘mFocusedApp’ in Command Prompt
+ Step 1: Run adb device to view device is connected. 
+ Step2: Run ‘adb shell’ command
+ Step 3: After running this command, open the app for which you want to find the appPackage and appActivity. 
+Note: Please make sure that you open the app before going to the next step, because command in the next step would provide the details only for the app which is currently in focus.
+
+Step 4: Now run this command: dumpsys window windows | grep -E ‘mCurrentFocus’
+ The above command would display the details of the app which is currently in focus. From that, you can figure out the appPackage and appActivity name as per the below image – appPackage starts with com. and ends before backshash (/), appPackage name is – com.android.vending
+appActivity starts after the backslash (/) and goes till the end. F appActivity name is – com.google.android.finsky.activities.MainActivity
+
+Step 5: There is one more similar command that provides the appPackage and appActivity name. This command adds some additional details before and after the package name & activity name, but you can still try it out just to verify that the results from the above command are same. This command is
+
+ dumpsys window windows | grep -E ‘mFocusedApp’ 
+
+
+2. How to use Ui Automator Viewer to inspect element (follow this tutorial for complete knowledge to locate element - http://toolsqa.com/mobile-automation/appium/findelement-and-findelements-commands/ 
+, webapp element: http://toolsqa.com/mobile-automation/appium/inspect-elements-of-mobile-web-application/ 
+And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-automate-webview-in-hybrid-app/ )
+  
+  
+  3. Scrollable (Veritcal and horizonal scroll)
+  
+    a. Using swipe method
+            public void verticalScrollUsingSwipe()  // using driver.swipe() method
+    {
+        Dimension dim =  driver.manage().window().getSize(); //get size of device
+        int height = dim.getHeight();  //device height
+        int width = dim.getWidth();     // device width
+        int x = width/2;                // x -axis remain constant for vertical scroll
+        
+        int startY = (int) (height*0.8);    // start position of y axis
+        int endY = (int) (height*0.20);     // end position of y axis 
+        
+        driver.swipe(x, startY, x, endY, 500);   //swipe method
+                
+    }
+    
+                    b. Using TouchAction By Element
+                    
+                    public void scrollUsingTouchAction_ByElements(MobileElement startElement, MobileElement endElement) // using TouchAction
+//  {
+//      TouchAction actions = new TouchAction(driver);
+//      actions.press(startElement).waitAction().moveTo(endElement).release().perform();
+//      
+//  }
+//  
+//  public void element()
+//  {
+//      MobileElement el1 = (MobileElement) driver.findElementByAccessibilityId("Views");
+//      el1.click();
+//      
+//      MobileElement animation = driver.findElementByXPath("//android.widget.TextView[@content-desc=\"Animation\"]");
+//              MobileElement gallery = driver.findElementByXPath("//android.widget.TextView[@content-desc=\"Gallery\"]");
+//              scrollUsingTouchAction_ByElements(animation, gallery);
+//  }
+
+                c. Using TouchAction By Coordinate
+                
+                
+                public void scrollUsingTouchAction_ByCoordinate() //scrolling by using touch action using coordinate
+//  {
+//      MobileElement gallery = driver.findElementByXPath("//android.widget.TextView[@content-desc=\"Gallery\"]");
+//      org.openqa.selenium.Point point = gallery.getLocation(); //location of mobile element
+//      int startX = point.x;
+//      int endX = point.x;
+//      
+//      Dimension dim = driver.manage().window().getSize();
+//      int height = dim.height;
+//      int width = dim.width;
+//      
+//      int startY = (int) (height*0.8);
+//      int endY = (int) (height*0.2);
+//      
+//              TouchAction actions = new TouchAction(driver);
+//      actions.press(startX, startY).waitAction().moveTo(endX, endY).release().perform();
+//              
+//  }
+````

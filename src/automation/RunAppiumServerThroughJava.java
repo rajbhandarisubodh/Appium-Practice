@@ -24,12 +24,12 @@ public class RunAppiumServerThroughJava {
 	public void setUp()
 	{
 		System.out.println("Appium Server Strating");
-		 service = AppiumDriverLocalService.buildDefaultService();
+		service = AppiumDriverLocalService.buildDefaultService();
 		service.start();
 		System.out.println("Appium Server Stated");
 		
 		System.out.println("Session loading....");
-		path = System.getProperty("user.dir");
+		//path = System.getProperty("user.dir");
 		DesiredCapabilities cap = new DesiredCapabilities();
 		cap.setCapability("platformName", "Android");
 		//cap.setCapability("platformVersion", "5.0");

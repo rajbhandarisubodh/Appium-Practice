@@ -1,6 +1,7 @@
  Tips & Tricks:
   
   1. way to find appPackage and appActivity (follow this - http://www.automationtestinghub.com/apppackage-and-appactivity-name/ )
+
  Using ‘mCurrentFocus’ or ‘mFocusedApp’ in Command Prompt
  Step 1: Run adb device to view device is connected. 
  Step2: Run ‘adb shell’ command
@@ -78,3 +79,91 @@ And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-autom
 //      actions.press(startX, startY).waitAction().moveTo(endX, endY).release().perform();
 //              
 //  }
+
+
+3. Inspect webelement of Hybrid app using chorme
+Step 1: Connect device and open hybrid web view
+step 2: open chrome and enter chrome://chrome-urls/
+step 3: go to chrome://inspect
+step 4: Device will be show then click inspect
+
+4. Context change from Native to webview using context handle
+/***
+public void webView() // Webview is redirected which is located at View>Webview
+    {
+        System.out.println("First Current Context : "+driver.getContext());
+        
+        System.out.println("Context Inspecting......");
+        switchContext("WEBVIEW"); //value passed to change webview if available
+        String webViewText = driver.findElementByXPath("//a[text()='Hello World! - 1']").getText();
+        System.out.println("Text on Web View: " +webViewText);
+    }
+
+    
+    public void switchContext(String context)
+    {
+        System.out.println("Before Switching: " +driver.getContext());
+        Set<String> con = driver.getContextHandles(); //inspect available context
+        for(String c : con)
+        {
+            System.out.println("Available Conntext:" +c);//Available context
+            if(c.contains(context))
+            {
+                driver.context(c); //switch context to Webview that is passed from above founction
+                break;
+            }
+        }
+        System.out.println("After Switching : " + driver.getContext());
+    }
+    
+**/
+
+
+
+5. Switch App (on below code current app is switched to sms app, system app by driver.startActivity("appPackage", "app Activity");
+ (follow tutorial 17 of Chirag ) 
+ public String getOTP()
+    {
+        //change app by driver.startActivity("appPackage", "app Activity");
+        driver.startActivity("com.android.messaging", "com.android.messaging.ui.conversationlist.ConversationListActivity");
+        String getOTPValue = driver.findElementById("com.android.messaging:id/conversation_snippet").getText().split(":")[1].trim();
+        return getOTPValue;
+    }
+    
+    
+ 6. Android key command for default enter supposed to select element form dropdown list
+    
+    //android key code method
+        driver.pressKeyCode(AndroidKeyCode.KEYCODE_PAGE_DOWN);
+        driver.pressKeyCode(AndroidKeyCode.KEYCODE_PAGE_DOWN);
+        driver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
+        Note: driver must be define using AndroidDriver i.e AndroidDriver<MobileElement> driver;
+        
+        
+ 7.  LongPress touch action supposed to delete sms from message
+ TouchAction ac = new TouchAction(driver);
+        MobileElement ele = driver.findElementById("com.android.messaging:id/conversation_snippet");
+        ac.longPress(ele).perform().release();// longpress perfomed
+        
+        
+   8.   Screenshot function (how to take screenshot, save file name with current date format)
+   /**
+       public void screenShot() throws IOException
+        {
+            getScreenshot(driver); //screenshot taken
+        }
+    
+     // function for screenshot
+    public void getScreenshot(AppiumDriver<MobileElement> d) throws IOException
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss"); // date format defined to save on screenshot name
+        Date date = new Date(); // date defined
+        String fileName = sdf.format(date); // renamed file name to date
+        File des = d.getScreenshotAs(OutputType.FILE); // screenshot
+        //save screenshot to folder
+        FileUtils.copyFile(des, new File(System.getProperty("user.dir")+ "//Screenshot//" +fileName+".png"));
+        System.out.println("Screenshot captured");
+    }
+    
+    */
+    

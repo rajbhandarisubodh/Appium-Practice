@@ -30,8 +30,10 @@ public class FirstTestScript {
 		cap.setCapability("platformName","Android");
 		cap.setCapability("platformVersion", "5.0");
 		cap.setCapability("deviceName", "Samsung Galaxy S6");
-		cap.setCapability("app", path+"//app//ApiDemos.apk");
-		
+		//cap.setCapability("app", path+"//app//ApiDemos.apk");
+		cap.setCapability("appPackage", "io.appium.android.apis");
+		cap.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
+		cap.setCapability("noReset", "True");
 		try {
 			driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), cap);
 		} catch (MalformedURLException e) {

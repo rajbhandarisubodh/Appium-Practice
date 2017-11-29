@@ -78,4 +78,3 @@ And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-autom
 //      actions.press(startX, startY).waitAction().moveTo(endX, endY).release().perform();
 //              
 //  }
-````

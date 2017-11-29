@@ -68,9 +68,11 @@ public class VerticalScroll {
 			try {
 			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			driver.findElementByAccessibilityId("Tabs").click();
+			break;
 			}
 			catch(Exception e) 
 			{
+				System.out.println("exception: " + i);
 				verticalScrollUsingSwipe();
 			}
 		}
@@ -90,11 +92,17 @@ public class VerticalScroll {
 	{
 		Dimension dim =  driver.manage().window().getSize(); //get size of device
 		int height = dim.getHeight();  //device height
+		
 		int width = dim.getWidth();		// device width
 		int x = width/2;				// x -axis remain constant for vertical scroll
 		
 		int startY = (int) (height*0.8); 	// start position of y axis
 		int endY = (int) (height*0.20);		// end position of y axis 
+		System.out.println("\n" +"Height of device: "+ height);
+		System.out.println("Width of device: "+ width);
+		System.out.println("x-axis of device: "+ x);
+		System.out.println("start y: "+ startY);
+		System.out.println("end y: "+ endY);
 		
 		driver.swipe(x, startY, x, endY, 500);   //swipe method
 				

@@ -73,12 +73,6 @@ AppiumDriver<MobileElement> driver;
 		}
 		
 	}
-		
-		public void screenShot() throws IOException
-		{
-			getScreenshot(driver); //screenshot taken
-		}
-	
 	
 	public void getScreenshot(AppiumDriver<MobileElement> d) throws IOException // function for screenshot
 	{

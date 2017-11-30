@@ -1,30 +1,30 @@
  Tips & Tricks:
   
-  1. way to find appPackage and appActivity (follow this - http://www.automationtestinghub.com/apppackage-and-appactivity-name/ )
+ 1. way to find appPackage and appActivity (follow this - http://www.automationtestinghub.com/apppackage-and-appactivity-name/ )
 
- Using ‘mCurrentFocus’ or ‘mFocusedApp’ in Command Prompt
- Step 1: Run adb device to view device is connected. 
- Step2: Run ‘adb shell’ command
- Step 3: After running this command, open the app for which you want to find the appPackage and appActivity. 
-Note: Please make sure that you open the app before going to the next step, because command in the next step would provide the details only for the app which is currently in focus.
+     Using ‘mCurrentFocus’ or ‘mFocusedApp’ in Command Prompt
+     Step 1: Run adb device to view device is connected. 
+     Step2: Run ‘adb shell’ command
+     Step 3: After running this command, open the app for which you want to find the appPackage and appActivity. 
+    Note: Please make sure that you open the app before going to the next step, because command in the next step would provide the details only for the app which is currently in focus.
 
-Step 4: Now run this command: dumpsys window windows | grep -E ‘mCurrentFocus’
- The above command would display the details of the app which is currently in focus. From that, you can figure out the appPackage and appActivity name as per the below image – appPackage starts with com. and ends before backshash (/), appPackage name is – com.android.vending
-appActivity starts after the backslash (/) and goes till the end. F appActivity name is – com.google.android.finsky.activities.MainActivity
-
-Step 5: There is one more similar command that provides the appPackage and appActivity name. This command adds some additional details before and after the package name & activity name, but you can still try it out just to verify that the results from the above command are same. This command is
-
- dumpsys window windows | grep -E ‘mFocusedApp’ 
+    Step 4: Now run this command: dumpsys window windows | grep -E ‘mCurrentFocus’
+    
+    Step 5: There is one more similar command that provides the appPackage and appActivity name. This command adds some additional details before and after the package name & activity name, but you can still try it out just to verify that the results from the above command are same. This command is
+    
+     dumpsys window windows | grep -E ‘mFocusedApp’ 
 
 
 2. How to use Ui Automator Viewer to inspect element (follow this tutorial for complete knowledge to locate element - http://toolsqa.com/mobile-automation/appium/findelement-and-findelements-commands/ 
 , webapp element: http://toolsqa.com/mobile-automation/appium/inspect-elements-of-mobile-web-application/ 
 And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-automate-webview-in-hybrid-app/ )
+  whereas Appium inspector http://www.automationtestinghub.com/appium-desktop-inspector-inspect-mobile-elements/ 
   
-  
-  3. Scrollable (Veritcal and horizonal scroll)
+ 3. Scrollable (Veritcal and horizonal scroll)
   
     a. Using swipe method
+    
+    
             public void verticalScrollUsingSwipe()  // using driver.swipe() method
     {
         Dimension dim =  driver.manage().window().getSize(); //get size of device
@@ -39,7 +39,8 @@ And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-autom
                 
     }
     
-                    b. Using TouchAction By Element
+                   
+      b. Using TouchAction By Element
                     
                     public void scrollUsingTouchAction_ByElements(MobileElement startElement, MobileElement endElement) // using TouchAction
 //  {
@@ -58,7 +59,7 @@ And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-autom
 //              scrollUsingTouchAction_ByElements(animation, gallery);
 //  }
 
-                c. Using TouchAction By Coordinate
+       c. Using TouchAction By Coordinate
                 
                 
                 public void scrollUsingTouchAction_ByCoordinate() //scrolling by using touch action using coordinate
@@ -82,12 +83,16 @@ And webView http://toolsqa.com/mobile-automation/appium/how-to-inspect-and-autom
 
 
 3. Inspect webelement of Hybrid app using chorme
-Step 1: Connect device and open hybrid web view
-step 2: open chrome and enter chrome://chrome-urls/
-step 3: go to chrome://inspect
-step 4: Device will be show then click inspect
+
+
+        Step 1: Connect device and open hybrid web view
+        step 2: open chrome and enter chrome://chrome-urls/
+        step 3: go to chrome://inspect
+        step 4: Device will be show then click inspect
 
 4. Context change from Native to webview using context handle
+
+
 /***
 public void webView() // Webview is redirected which is located at View>Webview
     {
@@ -121,6 +126,8 @@ public void webView() // Webview is redirected which is located at View>Webview
 
 
 5. Switch App (on below code current app is switched to sms app, system app by driver.startActivity("appPackage", "app Activity");
+
+
  (follow tutorial 17 of Chirag ) 
  public String getOTP()
     {
@@ -167,3 +174,39 @@ public void webView() // Webview is redirected which is located at View>Webview
     
     */
     
+    
+    9. Device orientation method
+    
+    //Screenshot rotation method
+//      public void screenRotation() throws InterruptedException //Device orientation method
+//      {
+//          ScreenOrientation currentOrientation = driver.getOrientation(); // get current orientation
+//          System.out.println("Current orientation: " + currentOrientation);
+//      
+//          driver.rotate(ScreenOrientation.LANDSCAPE); // rotate to landscape mode
+//          Thread.sleep(2000);
+//          
+//          currentOrientation = driver.getOrientation();
+//          System.out.println("Current orientation: " + currentOrientation);
+//          
+//          driver.rotate(ScreenOrientation.PORTRAIT); // rotate to portrait mode
+//          currentOrientation = driver.getOrientation();
+//          
+//          System.out.println("Current orientation: " + currentOrientation);
+//          Thread.sleep(2000);
+//      }
+//     
+
+10  Tap functionality
+//  // Tap functionality to top on element using multiple fingers
+//  public void tapAction()
+//  {
+//      // tap method using Appium driver
+//      MobileElement view = driver.findElementByAccessibilityId("Views");
+//      driver.tap(1, view, 500);
+//      
+//      // tap method using Touch Action Class
+//      MobileElement autoComplete = driver.findElementByAccessibilityId("Auto Complete");
+//      new TouchAction(driver).tap(autoComplete).perform().release();
+//  }
+//  

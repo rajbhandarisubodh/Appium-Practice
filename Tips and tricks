@@ -1,4 +1,17 @@
  Tips & Tricks:
+ 
+ #git Commands with steps to push
+Note: User must have installed git
+1.  Open project folder where you want to upload to github
+2.  Right click and open git bash
+3.  Run git init
+4.  Run git status – to check status of project
+5.  Run git add . to upload to local repository of git
+6.  Add githu account : git config –global user.email “email id”
+7.  Run commit before push. Run commit –m “message”
+8.  Link to github repo: git remote add origin <URL>
+9.  Run push -u origin master – to push on master
+ 
   
  1. way to find appPackage and appActivity (follow this - http://www.automationtestinghub.com/apppackage-and-appactivity-name/ )
 

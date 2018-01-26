@@ -223,3 +223,34 @@ public void webView() // Webview is redirected which is located at View>Webview
 //      new TouchAction(driver).tap(autoComplete).perform().release();
 //  }
 //  
+
+11.   To access static variable from another class B from class A
+
+For eg: 
+public class B (){
+
+static String text = “Hello world” // variable should be static
+}
+
+// on class A
+
+import package.b; // package is package name
+
+public class A(){
+
+static B bObj;
+
+public static void setUp() { // function should be static
+System.out.println(“Output”+ bObj.text);
+}
+
+public void static main(String[] args)
+{
+    setup();
+}
+}
+
+
+
+12. To grant permission on apk use autoGrandPermission capabilities.
+For eg: cap.setCapability("autoGrantPermissions","true");

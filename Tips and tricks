@@ -254,3 +254,59 @@ public void static main(String[] args)
 
 12. To grant permission on apk use autoGrandPermission capabilities.
 For eg: cap.setCapability("autoGrantPermissions","true");
+
+13. Read and write excel xls file(Note: Apache Poi library should me imported before  proceeding)
+
+
+
+
+try {
+            // Specify the path of file
+        File src = new File("E:\\eclipse-java-oxygen-M5-NEW\\Text_Excel_Files\\First test practice.xlsx");
+        
+        
+         // load file
+        FileInputStream fis = new FileInputStream(src);
+        
+        // Load workbook
+        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        
+        // Load sheet- Here we are loading first sheetonly
+        XSSFSheet sh1 = wb.getSheetAt(0);
+        
+        
+        String cell = sh1.getRow(0).getCell(0).getStringCellValue();
+        
+        //to read
+        
+        // getRow() specify which row we want to read.
+         
+          // and getCell() specify which column to read.
+          // getStringCellValue() specify that we are reading String data.
+        
+    
+        System.out.println("Email content" +cell);
+        System.out.println(sh1.getRow(0).getCell(1).getStringCellValue());
+        
+        System.out.println("File read done");
+        //to write
+        // here createCell will create column
+         
+        // and setCellvalue will set the value
+        
+       
+        // here we need to specify where you want to save file
+        
+        FileOutputStream fos = new FileOutputStream(new File("E:\\\\eclipse-java-oxygen-M5-NEW\\\\Text_Excel_Files\\\\test.xlsx"));
+         sh1.getRow(0).createCell(3).setCellValue("CC Mobile number");
+        sh1.getRow(0).createCell(4).setCellValue("Mobile Number");
+        
+        
+        wb.write(fos)
+        System.out.println("File write done");
+        }
+        
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }

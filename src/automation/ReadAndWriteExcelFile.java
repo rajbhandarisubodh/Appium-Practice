@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,6 +27,10 @@ import io.appium.java_client.android.AndroidDriver;
 public class ReadAndWriteExcelFile {
 
 	AppiumDriver<MobileElement> driver;
+	XSSFWorkbook wb;
+	XSSFSheet sheet;
+	String cell;
+	
 	
 	String path;
 
@@ -42,7 +47,7 @@ public class ReadAndWriteExcelFile {
 		//cap.setCapability("appPackage", "io.appium.android.apis");
 		//cap.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
 		
-		cap.setCapability("udid", "10160a5273cd3302"); //device udid
+		//cap.setCapability("udid", "10160a5273cd3302"); //device udid
 		cap.setCapability("noReset", "True");
 		try {
 			driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), cap);
@@ -60,45 +65,49 @@ public class ReadAndWriteExcelFile {
 	{
 		try {
 			// Specify the path of file
-		File src = new File("E:\\eclipse-java-oxygen-M5-NEW\\Text_Excel_Files\\First test practice.xlsx");
+		File src = new File("E:\\eclipse-java-oxygen-M5-NEW\\Text_Excel_Files\\testdata.xlsx");
 		
 		
 		 // load file
 		FileInputStream fis = new FileInputStream(src);
 		
 		// Load workbook
-		XSSFWorkbook wb = new XSSFWorkbook(fis);
+		wb = new XSSFWorkbook(fis);
 		
 		// Load sheet- Here we are loading first sheetonly
-		XSSFSheet sh1 = wb.getSheetAt(0);
-		
-		
-		String cell = sh1.getRow(0).getCell(0).getStringCellValue();
-		
+		sheet = wb.getSheetAt(0);
 		//to read
 		
-		// getRow() specify which row we want to read.
-		 
-		  // and getCell() specify which column to read.
-		  // getStringCellValue() specify that we are reading String data.
+				// getRow() specify which row we want to read.
+				 
+				  // and getCell() specify which column to read.
+				  // getStringCellValue() specify that we are reading String data.
 		
-	
-		System.out.println("Email content" +cell);
-		System.out.println(sh1.getRow(0).getCell(1).getStringCellValue());
-		
-		System.out.println("File read done");
 		//to write
 		// here createCell will create column
 		 
 		// and setCellvalue will set the value
 		
-		sh1.getRow(0).createCell(3).setCellValue("CC Mobile number");
-		sh1.getRow(0).createCell(4).setCellValue("Mobile Number");
+		for(int i=1;i<=sheet.getLastRowNum();i++) {
+			
+			cell = sheet.getRow(i).getCell(0).getStringCellValue();
+			
+			System.out.println(" test email of user "+i+ cell);
+			
+
+			cell = sheet.getRow(i).getCell(1).getStringCellValue();
+			System.out.println(" test passord of user "+i+ cell);
+			
+			System.out.println("File read done");
+			
+			FileOutputStream fos = new FileOutputStream("E:\\eclipse-java-oxygen-M5-NEW\\Text_Excel_Files\\testdata.xlsx");
+			
+			sheet.getRow(i).createCell(2).setCellValue("Test pass");
 		
-		// here we need to specify where you want to save file
-		
-		FileOutputStream fos = new FileOutputStream(new File("E:\\\\eclipse-java-oxygen-M5-NEW\\\\Text_Excel_Files\\\\test.xlsx"));
-		
+			wb.write(fos);
+			
+			fos.close();
+		}
 		System.out.println("File write done");
 		}
 		

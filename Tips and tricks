@@ -257,8 +257,7 @@ For eg: cap.setCapability("autoGrantPermissions","true");
 
 13. Read and write excel xls file(Note: Apache Poi library should me imported before  proceeding)
 
-
-
+    Note: for using integer value from excel use String.valueOf(number);
 
 try {
             // Specify the path of file
@@ -296,6 +295,22 @@ try {
         
        
         // here we need to specify where you want to save file
+            for(i=1;i<=sheet.getLastRowNum(); i++) {
+            
+            for(int j=1; j<=sheet.getLastRowNum(); j++) {
+                
+                String result = sheet.getRow(j).getCell(8).getStringCellValue();
+            
+                if(result.equals("PASSED"))
+                {
+                    System.out.println("UserEmail:"+i+ " Exist, Retrying next user on list"+'\n');
+                    i++;
+                }
+                else {
+                    break;
+                }
+                
+            }   
         
         FileOutputStream fos = new FileOutputStream(new File("E:\\\\eclipse-java-oxygen-M5-NEW\\\\Text_Excel_Files\\\\test.xlsx"));
          sh1.getRow(0).createCell(3).setCellValue("CC Mobile number");
@@ -310,3 +325,10 @@ try {
         {
             System.out.println(e.getMessage());
         }
+        
+        
+  14. Explict wait -  wait until element is visible or present
+   
+   WebDriverWait wait =  new WebDriverWait(driver, 20);
+            
+   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(objectPath.settings_SignInSignOut)));

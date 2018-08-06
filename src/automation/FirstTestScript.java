@@ -30,7 +30,7 @@ public class FirstTestScript {
 		cap.setCapability("platformName","Android");
 		cap.setCapability("platformVersion", "5.0");
 		cap.setCapability("deviceName", "Samsung Galaxy S6");
-		//cap.setCapability("app", path+"//app//ApiDemos.apk");
+		//cap.setCapability("app", System.getProperty("user.dir")+"//app//ApiDemos.apk");
 		cap.setCapability("appPackage", "io.appium.android.apis");
 		cap.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
 		cap.setCapability("udid", "192.168.9.101:5555"); //device udid
